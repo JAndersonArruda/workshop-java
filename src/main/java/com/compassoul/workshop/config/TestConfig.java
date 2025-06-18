@@ -2,6 +2,7 @@ package com.compassoul.workshop.config;
 
 import com.compassoul.workshop.entities.Order;
 import com.compassoul.workshop.entities.User;
+import com.compassoul.workshop.entities.enums.OrderStatus;
 import com.compassoul.workshop.repositories.OrderRepository;
 import com.compassoul.workshop.repositories.UserRepository;
 
@@ -39,9 +40,9 @@ public class TestConfig implements CommandLineRunner {
         ));
 
         orderRepository.saveAll(Arrays.asList(
-                new Order(null, Instant.parse("2019-06-20T19:53:07Z"), user1),
-                new Order(null, Instant.parse("2019-07-21T03:42:10Z"), user2),
-                new Order(null, Instant.parse("2019-07-22T15:21:22Z"), user1)
+                new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, user1),
+                new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, user2),
+                new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, user1)
         ));
     }
 }
