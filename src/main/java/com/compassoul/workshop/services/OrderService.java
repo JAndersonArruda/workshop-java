@@ -1,9 +1,8 @@
 package com.compassoul.workshop.services;
 
 import com.compassoul.workshop.entities.Order;
-import com.compassoul.workshop.entities.User;
 import com.compassoul.workshop.repositories.OrderRepository;
-import com.compassoul.workshop.repositories.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
