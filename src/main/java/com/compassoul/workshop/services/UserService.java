@@ -3,6 +3,7 @@ package com.compassoul.workshop.services;
 import com.compassoul.workshop.entities.User;
 import com.compassoul.workshop.repositories.UserRepository;
 
+import com.compassoul.workshop.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> object = repository.findAllById(id);
-        return object.get();
+        return object.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User object) {
