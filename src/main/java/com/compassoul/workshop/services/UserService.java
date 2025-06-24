@@ -6,6 +6,7 @@ import com.compassoul.workshop.repositories.UserRepository;
 import com.compassoul.workshop.services.exceptions.DatabaseException;
 import com.compassoul.workshop.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -47,9 +48,13 @@ public class UserService {
     }
 
     public User update(Long id, User object) {
-        User entity = repository.getReferenceById(id);
-        updateData(entity, object);
-        return repository.save(entity);
+        try {
+            User entity = repository.getReferenceById(id);
+            updateData(entity, object);
+            return repository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(User entity, User object) {
